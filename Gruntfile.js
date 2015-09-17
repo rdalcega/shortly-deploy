@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     'string-replace': {
       dist: {
         files: {
-          'views/layout.ejs': 'views/layout.ejs',
+          //'views/layout.ejs': 'views/layout.ejs',
           'views/index.ejs': 'views/index.ejs'
         },
         options: {
@@ -34,6 +34,13 @@ module.exports = function(grunt) {
     nodemon: {
       dev: {
         script: 'server.js'
+      }
+    },
+
+    concat: {
+      dist: {
+        src: ['public/client/*.js'],
+        dest: 'public/dist/client.min.js'
       }
     },
 
@@ -132,9 +139,9 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
-    //'cssmin',
-    //'uglify',
-    //'string-replace'
+    'cssmin',
+    'concat',
+    'string-replace'
   ]);
 
   grunt.registerTask('upload', function(n) {
