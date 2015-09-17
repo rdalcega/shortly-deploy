@@ -119,8 +119,8 @@ module.exports = function(grunt) {
         'npm shrinkwrap',
         'git add .',
         'git commit -m "deploy"',
-        'git push azure master'
-        ].join('&&')
+        'git push azure mongo'
+        ].join(';')
       }
     },
   });
@@ -172,7 +172,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
       //'jshint',
-      'mochaTest',
+      //'mochaTest',
       'upload'
   ]);
 
