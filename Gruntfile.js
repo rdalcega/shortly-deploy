@@ -38,6 +38,11 @@ module.exports = function(grunt) {
     },
 
     concat: {
+
+      options: {
+        separator: ';'
+      },
+
       groupA: {
         dist: {
           src: ['public/client/*.js'],
@@ -52,14 +57,14 @@ module.exports = function(grunt) {
       }
     },
 
-    uglify: {
-      dist: {
-        files: {
-          'public/dist/client.min.js': 'public/client/*.js',
-          'public/dist/lib.min.js': 'public/lib/*.js'
-        }
-      }
-    },
+    // uglify: {
+    //   dist: {
+    //     files: {
+    //       'public/dist/client.min.js': 'public/client/*.js',
+    //       'public/dist/lib.min.js': 'public/lib/*.js'
+    //     }
+    //   }
+    // },
 
     jshint: {
       files: [
