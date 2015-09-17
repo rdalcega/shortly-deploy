@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     'string-replace': {
       dist: {
         files: {
-          //'views/layout.ejs': 'views/layout.ejs',
+          'views/layout.ejs': 'views/layout.ejs',
           'views/index.ejs': 'views/index.ejs'
         },
         options: {
@@ -38,9 +38,17 @@ module.exports = function(grunt) {
     },
 
     concat: {
-      dist: {
-        src: ['public/client/*.js'],
-        dest: 'public/dist/client.min.js'
+      groupA: {
+        dist: {
+          src: ['public/client/*.js'],
+          dest: 'public/dist/client.min.js'
+        }
+      },
+      groupB: {
+        dist: {
+          src: ['public/lib/*.js'],
+          dest: 'public/dist/lib.min.js'
+        }
       }
     },
 
