@@ -2,7 +2,24 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    concat: {
+    
+    'string-replace': {
+      dist: {
+        files: {
+          'views/layout.ejs': 'views/layout.ejs',
+          'views/index.ejs': 'views/index.ejs'
+        },
+        options: {
+          replacements: [
+
+            {
+              pattern: 'dependenciesDEV',
+              replacement: 'dependenciesPROD'
+            }
+
+          ]
+        }
+      }
     },
 
     mochaTest: {
@@ -21,11 +38,17 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      dist: {
+        files: {
+          'public/dist/client.min.js': 'public/client/*.js',
+          'public/dist/lib.min.js': 'public/lib/*.js'
+        }
+      }
     },
 
     jshint: {
       files: [
-        // Add filespec list here
+        '**/*.js'
       ],
       options: {
         force: 'true',
@@ -38,7 +61,11 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
-        // Add filespec list here
+      target: {
+        files: {
+          'public/dist/style.min.css': 'public/style.css'
+        }
+      }
     },
 
     watch: {
@@ -48,7 +75,6 @@ module.exports = function(grunt) {
           'public/lib/**/*.js',
         ],
         tasks: [
-          'concat',
           'uglify'
         ]
       },
@@ -59,7 +85,17 @@ module.exports = function(grunt) {
     },
 
     shell: {
+      options: {
+        stdout: true
+      },
       prodServer: {
+        command: [
+        'npm install',
+        'npm shrinkwrap',
+        'git add .',
+        'git commit -m "deploy"',
+        'git push azure master'
+        ].join('; ')
       }
     },
   });
@@ -72,6 +108,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-string-replace');
 
   grunt.registerTask('server-dev', function (target) {
     // Running nodejs in a different process and displaying output on the main console
@@ -95,18 +132,23 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'cssmin',
+    'uglify',
+    'string-replace'
   ]);
 
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
-      // add your production server task here
+      grunt.task.run( [ 'shell' ] );
     } else {
       grunt.task.run([ 'server-dev' ]);
     }
   });
 
   grunt.registerTask('deploy', [
-      // add your production server task here
+      //'jshint',
+      'mochaTest',
+      'upload'
   ]);
 
 
