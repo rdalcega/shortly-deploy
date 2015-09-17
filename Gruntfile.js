@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     'string-replace': {
       dist: {
         files: {
-          //'views/layout.ejs': 'views/layout.ejs',
+          'views/layout.ejs': 'views/layout.ejs',
           'views/index.ejs': 'views/index.ejs'
         },
         options: {
@@ -48,13 +48,13 @@ module.exports = function(grunt) {
           src: ['public/client/*.js'],
           dest: 'public/dist/client.min.js'
         }
+      },
+      groupB: {
+        dist: {
+          src: ['public/lib/*.js'],
+          dest: 'public/dist/lib.min.js'
+        }
       }
-      // groupB: {
-      //   dist: {
-      //     src: ['public/lib/*.js'],
-      //     dest: 'public/dist/lib.min.js'
-      //   }
-      // }
     },
 
     // uglify: {
@@ -140,7 +140,7 @@ module.exports = function(grunt) {
     nodemon.stdout.pipe(process.stdout);
     nodemon.stderr.pipe(process.stderr);
 
-    grunt.task.run([ 'watch' ]);
+    //grunt.task.run([ 'watch' ]);
   });
 
   ////////////////////////////////////////////////////
