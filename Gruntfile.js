@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     'string-replace': {
       dist: {
         files: {
-          'views/layout.ejs': 'views/layout.ejs',
+          //'views/layout.ejs': 'views/layout.ejs',
           'views/index.ejs': 'views/index.ejs'
         },
         options: {
@@ -40,8 +40,8 @@ module.exports = function(grunt) {
     uglify: {
       dist: {
         files: {
-          'public/dist/client.min.js': 'public/client/*.js',
-          'public/dist/lib.min.js': 'public/lib/*.js'
+          'public/dist/client.min.js': 'public/client/*.js'
+          //'public/dist/lib.min.js': 'public/lib/*.js'
         }
       }
     },
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
         'git add .',
         'git commit -m "deploy"',
         'git push azure master'
-        ].join('; ')
+        ].join('&&')
       }
     },
   });
