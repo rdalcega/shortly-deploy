@@ -63,8 +63,8 @@ module.exports = function(grunt) {
           'public/dist/client.min.js': 'public/client/*.js',
           'public/dist/lib.min.js': [
             'public/lib/underscore.js',
-            'public/lib/backbone.js',
             'public/lib/jquery.js',
+            'public/lib/backbone.js',
             'public/lib/handlebars.js'
           ]
         }
